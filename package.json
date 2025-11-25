@@ -1,0 +1,13 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "exports": "",
+  "files": [
+    "src/"
+  ],
+  "scripts": {},
+  "keywords": [],
+  "license": "UNLICENSED"
+}
