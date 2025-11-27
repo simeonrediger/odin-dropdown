@@ -1,9 +1,9 @@
 {
-  "name": "dropdown-menu",
+  "name": "dropdown",
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "exports": "./src/dropdown-menu.js",
+  "exports": "./src/dropdown.js",
   "files": [
     "src/"
   ],
