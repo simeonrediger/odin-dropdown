@@ -1,0 +1,11 @@
+-   Should consist of...
+    -   a button that toggles visibility of the content's visibility
+    -   the dropdown content itself
+-   Button typically only triggers visibility of the dropdown content
+-   Dropdown contents should typically only contain items that will trigger an action upon clicking them
+-   Actions can include things like "Edit", "Copy", "Delete", links, etc.
+-   Visibility can be triggered by click or hover
+-   Hard-code menu items in HTML but hide/show using JS
+-   JS should be reusable such that you can create multiple dropdowns on a page in HTML
+-   Bundle code into a module and publish package to npm
+    -   Then you can install it anytime you'd like
