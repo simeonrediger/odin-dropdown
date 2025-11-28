@@ -1,6 +1,5 @@
 const triggerAttribute = 'data-dropdown-target';
 const contentAttribute = 'data-dropdown-name';
-const contentIsOpenedAttribute = 'data-dropdown-is-opened';
 const closedClass = 'dropdown-closed';
 const closedSelector = `.${closedClass}`;
 
@@ -166,13 +165,11 @@ function validateTriggerTargets() {
 
 function closeContent(content) {
     openedContentTriggers.delete(content);
-    content.removeAttribute(contentIsOpenedAttribute);
     content.classList.add(closedClass);
 }
 
 function openContent(content, trigger) {
     openedContentTriggers.set(content, trigger);
-    content.setAttribute(contentIsOpenedAttribute, '');
     content.classList.remove(closedClass);
 }
 
