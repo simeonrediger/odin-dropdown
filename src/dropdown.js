@@ -35,7 +35,7 @@ function init(rootElement, options = {}) {
 
     for (const trigger of triggers) {
         const contentName = trigger.dataset.dropdownTarget;
-        const contentSelector = `[data-dropdown-name='${contentName}']`;
+        const contentSelector = `[${contentAttribute}='${contentName}']`;
         const contentCount = root.querySelectorAll(contentSelector).length;
 
         if (contentCount === 0) {
@@ -121,7 +121,7 @@ function positionContent(content, clientX, clientY) {
 
 function getContent(trigger) {
     const contentName = trigger.dataset.dropdownTarget;
-    const contentSelector = `[data-dropdown-name='${contentName}']`;
+    const contentSelector = `[${contentAttribute}='${contentName}']`;
     const contentMatches = root.querySelectorAll(contentSelector);
     const contentCount = contentMatches.length;
 
