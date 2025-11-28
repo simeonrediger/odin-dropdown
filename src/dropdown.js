@@ -6,6 +6,7 @@ const contentClosedClass = 'dropdown-closed';
 let root;
 let allowMultipleOpen;
 let remainOpenOnExternalClicks;
+let remainOpenOnEscape;
 
 const openedContentTriggers = new Map();
 
@@ -16,6 +17,7 @@ function init(rootElement, options = {}) {
         options.remainOpenOnExternalClicks ??
         options.allowMultipleOpen ??
         false;
+    remainOpenOnEscape = options.remainOpenOnEscape ?? false;
 
     validateRoot();
     validateOptions();
@@ -41,6 +43,10 @@ function insertStyles() {
 function bindEvents() {
     if (!remainOpenOnExternalClicks) {
         document.addEventListener('mousedown', closeOnExternalTarget);
+    }
+
+    if (!remainOpenOnEscape) {
+        document.addEventListener('keydown', closeOnEscape);
     }
 
     root.addEventListener('click', handleClick);
@@ -164,6 +170,12 @@ function closeOnExternalTarget(event) {
     const isExternalTarget = !closestTrigger && !closestContent;
 
     if (isExternalTarget) {
+        closeAllOpenedContent();
+    }
+}
+
+function closeOnEscape(event) {
+    if (event.key === 'Escape') {
         closeAllOpenedContent();
     }
 }
