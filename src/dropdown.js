@@ -1,9 +1,9 @@
 const triggerAttribute = 'data-dropdown-target';
 const contentAttribute = 'data-dropdown-name';
+const contentIsOpenedAttribute = 'data-dropdown-is-opened';
+const openedSelector = `[${contentIsOpenedAttribute}]`;
 const closedClass = 'dropdown-closed';
-const openedClass = 'dropdown-opened';
 const closedSelector = `.${closedClass}`;
-const openedSelector = `.${openedClass}`;
 
 let root;
 let allowMultipleOpen;
@@ -161,12 +161,12 @@ function validateRoot(root) {
 }
 
 function closeContent(content) {
+    content.removeAttribute(contentIsOpenedAttribute);
     content.classList.add(closedClass);
-    content.classList.remove(openedClass);
 }
 
 function openContent(content) {
-    content.classList.add(openedClass);
+    content.setAttribute(contentIsOpenedAttribute, '');
     content.classList.remove(closedClass);
 }
 
@@ -183,7 +183,7 @@ function closeAllOpenedContent() {
 }
 
 function contentIsOpened(content) {
-    return content.classList.contains(openedClass);
+    return content.hasAttribute(contentIsOpenedAttribute);
 }
 
 const dropdown = {
