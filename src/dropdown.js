@@ -2,6 +2,7 @@ const buttonSelector = "[data-dropdown='button']";
 const contentSelector = "[data-dropdown='content']";
 const closedClass = 'dropdown-closed';
 const openedClass = 'dropdown-opened';
+const closedSelector = `.${closedClass}`;
 const openedSelector = `.${openedClass}`;
 
 let root;
@@ -12,6 +13,7 @@ function init(rootElement, options = {}) {
     root = rootElement;
     multipleOpenAllowed = options.multipleOpenAllowed ?? false;
 
+    insertStyles();
     const buttons = root.querySelectorAll(buttonSelector);
 
     for (const button of buttons) {
@@ -69,6 +71,12 @@ function hideAllContent() {
 
 function contentIsOpened(content) {
     return content.classList.contains(openedClass);
+}
+
+function insertStyles() {
+    const styles = document.createElement('style');
+    styles.innerHTML = `${closedSelector} { display: none; }`;
+    document.head.append(styles);
 }
 
 function handleContentNotFound(button, nextElement) {
