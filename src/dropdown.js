@@ -13,7 +13,18 @@ function init(rootElement, options = {}) {
     validateRoot(rootElement);
     root = rootElement;
     allowMultipleOpen = options.multipleOpenAllowed ?? false;
-    remainOpenOnExternalClicks = options.remainOpenOnExternalClicks ?? false;
+    remainOpenOnExternalClicks =
+        options.remainOpenOnExternalClicks ?? allowMultipleOpen ?? false;
+
+    if (allowMultipleOpen && !remainOpenOnExternalClicks) {
+        console.error(
+            'remainOpenOnExternalClicks can only be disabled if',
+            'allowMultipleOpen is not enabled.',
+            '\nEnabling remainOpenOnExternalClicks.',
+        );
+
+        remainOpenOnExternalClicks = true;
+    }
 
     insertStyles();
     hideAllContent();
