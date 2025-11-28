@@ -20,9 +20,9 @@ function init(rootElement, options = {}) {
         false;
 
     validateOptions();
+    validateTriggerTargets();
     insertStyles();
     closeAllContent();
-    validateTriggerTargets();
 
     if (!remainOpenOnExternalClicks) {
         document.addEventListener('mousedown', closeOnExternalTarget);
