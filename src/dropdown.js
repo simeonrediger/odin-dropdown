@@ -129,7 +129,7 @@ function getTargetContent(trigger) {
     const contentId = trigger.getAttribute('aria-controls');
     const content = root.getElementById(contentId);
 
-    if (!contentId) {
+    if (!content) {
         console.error(`No target content with ID: ${contentId}`);
     }
 
