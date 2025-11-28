@@ -1,9 +1,14 @@
 const buttonSelector = "[data-dropdown='button']";
 const contentSelector = "[data-dropdown='content']";
 const closedClass = 'dropdown-closed';
+const openedClass = 'dropdown-opened';
 
-function init(root) {
-    validateRoot(root);
+let root;
+
+function init(rootElement) {
+    validateRoot(rootElement);
+    root = rootElement;
+
     const buttons = root.querySelectorAll(buttonSelector);
 
     for (const button of buttons) {
@@ -15,16 +20,37 @@ function init(root) {
         }
 
         hideContent(content);
-        button.addEventListener('click', () => toggleContent(content));
+        button.addEventListener('click', () => handleButtonClick(content));
+    }
+}
+
+function handleButtonClick(content) {
+    if (contentIsOpened(content)) {
+        hideContent(content);
+    } else {
+        hideAllContent();
+        showContent(content);
     }
 }
 
 function hideContent(content) {
     content.classList.add(closedClass);
+    content.classList.remove(openedClass);
 }
 
-function toggleContent(content) {
-    content.classList.toggle(closedClass);
+function showContent(content) {
+    content.classList.add(openedClass);
+    content.classList.remove(closedClass);
+}
+
+function hideAllContent() {
+    for (const content of root.getElementsByClassName(openedClass)) {
+        hideContent(content);
+    }
+}
+
+function contentIsOpened(content) {
+    return content.classList.contains(openedClass);
 }
 
 function handleContentNotFound(button, nextElement) {
