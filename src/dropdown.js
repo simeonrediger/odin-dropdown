@@ -29,7 +29,7 @@ function init(rootElement, options = {}) {
     }
 
     insertStyles();
-    hideAllContent();
+    closeAllContent();
 
     const triggers = root.querySelectorAll(`[${triggerAttribute}]`);
 
@@ -142,7 +142,7 @@ function closeOnExternalTarget(event) {
     const isExternalTarget = !closestTrigger && !closestContent;
 
     if (isExternalTarget) {
-        hideAllContent();
+        closeAllContent();
     }
 }
 
@@ -170,7 +170,7 @@ function openContent(content) {
     content.classList.remove(closedClass);
 }
 
-function hideAllContent() {
+function closeAllContent() {
     for (const content of root.querySelectorAll(`[${contentAttribute}]`)) {
         closeContent(content);
     }
