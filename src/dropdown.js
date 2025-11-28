@@ -162,6 +162,7 @@ function closeContent(content) {
 
 function openContent(content, trigger) {
     openedContentTriggers.set(content, trigger);
+    trigger.setAttribute('aria-expanded', true);
     content.classList.remove(contentClosedClass);
 }
 
