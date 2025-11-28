@@ -7,11 +7,13 @@ const openedSelector = `.${openedClass}`;
 
 let root;
 let multipleOpenAllowed = false;
+let remainOpenOnExternalClicks = false;
 
 function init(rootElement, options = {}) {
     validateRoot(rootElement);
     root = rootElement;
     multipleOpenAllowed = options.multipleOpenAllowed ?? false;
+    remainOpenOnExternalClicks = options.remainOpenOnExternalClicks ?? false;
 
     insertStyles();
     const buttons = root.querySelectorAll(buttonSelector);
@@ -28,7 +30,9 @@ function init(rootElement, options = {}) {
         button.addEventListener('click', () => handleButtonClick(content));
     }
 
-    document.addEventListener('mousedown', closeOnExternalTarget);
+    if (!remainOpenOnExternalClicks) {
+        document.addEventListener('mousedown', closeOnExternalTarget);
+    }
 }
 
 function handleButtonClick(content) {
