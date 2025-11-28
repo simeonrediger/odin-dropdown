@@ -187,7 +187,7 @@ function closeAllContent() {
 }
 
 function closeAllOpenedContent() {
-    const allOpenedContent = root.querySelectorAll(openedSelector);
+    const allOpenedContent = openedContentTriggers.keys();
 
     for (const content of allOpenedContent) {
         closeContent(content);
