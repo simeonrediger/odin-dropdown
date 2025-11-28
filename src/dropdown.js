@@ -172,13 +172,17 @@ function openContent(content) {
 }
 
 function closeAllContent() {
-    for (const content of root.querySelectorAll(`[${contentAttribute}]`)) {
+    const allContent = root.querySelectorAll(`[${contentAttribute}]`);
+
+    for (const content of allContent) {
         closeContent(content);
     }
 }
 
 function closeAllOpenedContent() {
-    for (const content of root.querySelectorAll(openedSelector)) {
+    const allOpenedContent = root.querySelectorAll(openedSelector);
+
+    for (const content of allOpenedContent) {
         closeContent(content);
     }
 }
