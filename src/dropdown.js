@@ -31,22 +31,7 @@ function init(rootElement, options = {}) {
 
     insertStyles();
     closeAllContent();
-
-    const triggers = root.querySelectorAll(`[${triggerAttribute}]`);
-
-    for (const trigger of triggers) {
-        const contentName = trigger.dataset.dropdownTarget;
-        const contentSelector = `[${contentAttribute}='${contentName}']`;
-        const contentCount = root.querySelectorAll(contentSelector).length;
-
-        if (contentCount === 0) {
-            console.error(`No element matching selector: ${contentSelector}`);
-        } else if (contentCount > 1) {
-            console.error(
-                `More than 1 element matching selector: ${contentSelector}`,
-            );
-        }
-    }
+    validateTriggerTargets();
 
     if (!remainOpenOnExternalClicks) {
         document.addEventListener('mousedown', closeOnExternalTarget);
@@ -162,6 +147,14 @@ function validateRoot(root) {
         throw new TypeError(
             "'root' must be an Element, Document, or DocumentFragment",
         );
+    }
+}
+
+function validateTriggerTargets() {
+    const triggers = root.querySelectorAll(`[${triggerAttribute}]`);
+
+    for (const trigger of triggers) {
+        getTargetContent(trigger);
     }
 }
 
