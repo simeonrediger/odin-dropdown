@@ -25,6 +25,8 @@ function init(rootElement, options = {}) {
         hideContent(content);
         button.addEventListener('click', () => handleButtonClick(content));
     }
+
+    document.addEventListener('mousedown', closeOnExternalTarget);
 }
 
 function handleButtonClick(content) {
@@ -36,6 +38,16 @@ function handleButtonClick(content) {
         }
 
         showContent(content);
+    }
+}
+
+function closeOnExternalTarget(event) {
+    const closestButton = event.target.closest(buttonSelector);
+    const closestContent = event.target.closest(contentSelector);
+    const isExternalTarget = !closestButton && !closestContent;
+
+    if (isExternalTarget) {
+        hideAllContent();
     }
 }
 
