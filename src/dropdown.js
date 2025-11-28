@@ -66,12 +66,13 @@ function handleTriggerClick(event, trigger) {
             closeAllOpenedContent();
         }
 
-        positionContent(content, event.clientX, event.clientY);
+        positionContent(content, trigger, event.clientX, event.clientY);
         openContent(content, trigger);
     }
 }
 
-function positionContent(content, clientX, clientY) {
+function positionContent(content, trigger, clientX, clientY) {
+    insertContentAfterTrigger(content, trigger);
     const contentDisplay = content.style.display;
     const contentVisibility = content.style.visibility;
 
@@ -106,6 +107,10 @@ function positionContent(content, clientX, clientY) {
         (contentOverflowsViewport.y
             ? clickRelativeToParent.y - contentRect.height
             : clickRelativeToParent.y) + 'px';
+}
+
+function insertContentAfterTrigger(content, trigger) {
+    trigger.parentNode.insertBefore(content, trigger.nextElementSibling);
 }
 
 function getTargetContent(trigger) {
