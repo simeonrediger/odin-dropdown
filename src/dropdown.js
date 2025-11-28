@@ -32,6 +32,12 @@ function init(rootElement, options = {}) {
     bindEvents();
 }
 
+function insertStyles() {
+    const styles = document.createElement('style');
+    styles.innerHTML = `.${contentClosedClass} { display: none; }`;
+    document.head.append(styles);
+}
+
 function bindEvents() {
     if (!remainOpenOnExternalClicks) {
         document.addEventListener('mousedown', closeOnExternalTarget);
@@ -111,12 +117,6 @@ function positionContent(content, clientX, clientY) {
         (contentOverflowsViewport.y
             ? clickRelativeToParent.y - contentRect.height
             : clickRelativeToParent.y) + 'px';
-}
-
-function insertStyles() {
-    const styles = document.createElement('style');
-    styles.innerHTML = `.${contentClosedClass} { display: none; }`;
-    document.head.append(styles);
 }
 
 function getTargetContent(trigger) {
