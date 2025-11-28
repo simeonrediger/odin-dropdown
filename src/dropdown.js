@@ -71,7 +71,7 @@ function handleTriggerClick(event, trigger) {
     }
 
     if (contentIsOpened(content)) {
-        hideContent(content);
+        closeContent(content);
     } else {
         if (!allowMultipleOpen) {
             hideAllOpenedContent();
@@ -160,7 +160,7 @@ function validateRoot(root) {
     }
 }
 
-function hideContent(content) {
+function closeContent(content) {
     content.classList.add(closedClass);
     content.classList.remove(openedClass);
 }
@@ -172,13 +172,13 @@ function showContent(content) {
 
 function hideAllContent() {
     for (const content of root.querySelectorAll(`[${contentAttribute}]`)) {
-        hideContent(content);
+        closeContent(content);
     }
 }
 
 function hideAllOpenedContent() {
     for (const content of root.querySelectorAll(openedSelector)) {
-        hideContent(content);
+        closeContent(content);
     }
 }
 
