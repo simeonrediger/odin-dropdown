@@ -78,7 +78,7 @@ function handleTriggerClick(event, trigger) {
         }
 
         positionContent(content, event.clientX, event.clientY);
-        showContent(content);
+        openContent(content);
     }
 }
 
@@ -165,7 +165,7 @@ function closeContent(content) {
     content.classList.remove(openedClass);
 }
 
-function showContent(content) {
+function openContent(content) {
     content.classList.add(openedClass);
     content.classList.remove(closedClass);
 }
