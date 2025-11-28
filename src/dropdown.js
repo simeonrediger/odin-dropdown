@@ -72,6 +72,10 @@ function handleTriggerClick(event, trigger) {
     }
 }
 
+function insertContentAfterTrigger(content, trigger) {
+    trigger.parentNode.insertBefore(content, trigger.nextElementSibling);
+}
+
 function positionContent(content, clientX, clientY) {
     const contentDisplay = content.style.display;
     const contentVisibility = content.style.visibility;
@@ -109,8 +113,10 @@ function positionContent(content, clientX, clientY) {
             : clickRelativeToParent.y) + 'px';
 }
 
-function insertContentAfterTrigger(content, trigger) {
-    trigger.parentNode.insertBefore(content, trigger.nextElementSibling);
+function insertStyles() {
+    const styles = document.createElement('style');
+    styles.innerHTML = `.${contentClosedClass} { display: none; }`;
+    document.head.append(styles);
 }
 
 function getTargetContent(trigger) {
@@ -124,6 +130,34 @@ function getTargetContent(trigger) {
     return content;
 }
 
+function openContent(content, trigger) {
+    openedContentTriggers.set(content, trigger);
+    trigger.setAttribute('aria-expanded', true);
+    content.classList.remove(contentClosedClass);
+}
+
+function closeContent(content, trigger) {
+    openedContentTriggers.delete(content);
+    trigger?.setAttribute('aria-expanded', false);
+    content.classList.add(contentClosedClass);
+}
+
+function closeAllContent() {
+    const allContent = root.querySelectorAll(`[${contentAttribute}]`);
+
+    for (const content of allContent) {
+        closeContent(content);
+    }
+}
+
+function closeAllOpenedContent() {
+    const openedContentEntries = openedContentTriggers.entries();
+
+    for (const [content, trigger] of openedContentEntries) {
+        closeContent(content, trigger);
+    }
+}
+
 function closeOnExternalTarget(event) {
     const closestTrigger = event.target.closest(`[${triggerAttribute}]`);
     const closestContent = event.target.closest(`[${contentAttribute}]`);
@@ -132,12 +166,6 @@ function closeOnExternalTarget(event) {
     if (isExternalTarget) {
         closeAllOpenedContent();
     }
-}
-
-function insertStyles() {
-    const styles = document.createElement('style');
-    styles.innerHTML = `.${contentClosedClass} { display: none; }`;
-    document.head.append(styles);
 }
 
 function validateRoot() {
@@ -157,34 +185,6 @@ function validateOptions() {
         );
 
         remainOpenOnExternalClicks = true;
-    }
-}
-
-function closeContent(content, trigger) {
-    openedContentTriggers.delete(content);
-    trigger?.setAttribute('aria-expanded', false);
-    content.classList.add(contentClosedClass);
-}
-
-function openContent(content, trigger) {
-    openedContentTriggers.set(content, trigger);
-    trigger.setAttribute('aria-expanded', true);
-    content.classList.remove(contentClosedClass);
-}
-
-function closeAllContent() {
-    const allContent = root.querySelectorAll(`[${contentAttribute}]`);
-
-    for (const content of allContent) {
-        closeContent(content);
-    }
-}
-
-function closeAllOpenedContent() {
-    const openedContentEntries = openedContentTriggers.entries();
-
-    for (const [content, trigger] of openedContentEntries) {
-        closeContent(content, trigger);
     }
 }
 
