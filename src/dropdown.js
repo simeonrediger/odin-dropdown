@@ -18,7 +18,7 @@ function init(rootElement, options = {}) {
         options.allowMultipleOpen ??
         false;
 
-    validateRoot(root);
+    validateRoot();
     validateOptions();
     validateTriggerTargets();
     insertStyles();
@@ -136,7 +136,7 @@ function insertStyles() {
     document.head.append(styles);
 }
 
-function validateRoot(root) {
+function validateRoot() {
     if (typeof root.querySelectorAll !== 'function') {
         throw new TypeError(
             "'root' must be an Element, Document, or DocumentFragment",
