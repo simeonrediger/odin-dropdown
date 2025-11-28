@@ -3,7 +3,8 @@ const contentSelector = "[data-dropdown='content']";
 const closedClass = 'dropdown-closed';
 
 function init(root = document) {
-    const buttons = root.querySelectorAll?.(buttonSelector);
+    validateRoot(root);
+    const buttons = root.querySelectorAll(buttonSelector);
 
     for (const button of buttons) {
         const content = button.nextElementSibling;
@@ -36,6 +37,14 @@ function handleContentNotFound(button, nextElement) {
         '\nNext Element:',
         nextElement,
     );
+}
+
+function validateRoot(root) {
+    if (typeof root.querySelectorAll !== 'function') {
+        throw new TypeError(
+            "'root' must be an Element, Document, or DocumentFragment",
+        );
+    }
 }
 
 const dropdown = {
