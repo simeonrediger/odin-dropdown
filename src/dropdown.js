@@ -6,13 +6,13 @@ const closedSelector = `.${closedClass}`;
 const openedSelector = `.${openedClass}`;
 
 let root;
-let multipleOpenAllowed;
+let allowMultipleOpen;
 let remainOpenOnExternalClicks;
 
 function init(rootElement, options = {}) {
     validateRoot(rootElement);
     root = rootElement;
-    multipleOpenAllowed = options.multipleOpenAllowed ?? false;
+    allowMultipleOpen = options.multipleOpenAllowed ?? false;
     remainOpenOnExternalClicks = options.remainOpenOnExternalClicks ?? false;
 
     insertStyles();
@@ -60,7 +60,7 @@ function handleTriggerClick(trigger) {
     if (contentIsOpened(content)) {
         hideContent(content);
     } else {
-        if (!multipleOpenAllowed) {
+        if (!allowMultipleOpen) {
             hideAllOpenedContent();
         }
 
