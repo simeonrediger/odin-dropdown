@@ -14,6 +14,7 @@ function mapContentToButtons(buttons) {
 
         if (!nextElement.matches(contentSelector)) {
             handleWrongNextElement(button, nextElement);
+            return;
         }
 
         buttonsAndContent.set(button, nextElement);
