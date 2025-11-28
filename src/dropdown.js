@@ -13,8 +13,13 @@ function init(root = document) {
             continue;
         }
 
+        hideContent(content);
         button.addEventListener('click', () => toggleContent(content));
     }
+}
+
+function hideContent(content) {
+    content.classList.add(closedClass);
 }
 
 function toggleContent(content) {
