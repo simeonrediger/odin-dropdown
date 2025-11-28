@@ -52,15 +52,15 @@ function init(rootElement, options = {}) {
     root.addEventListener('click', handleClick);
 }
 
-function handleClick({ target }) {
-    const trigger = target.closest(`[${triggerAttribute}]`);
+function handleClick(event) {
+    const trigger = event.target.closest(`[${triggerAttribute}]`);
 
     if (trigger) {
-        handleTriggerClick(trigger);
+        handleTriggerClick(event, trigger);
     }
 }
 
-function handleTriggerClick(trigger) {
+function handleTriggerClick(event, trigger) {
     const content = getContent(trigger);
 
     if (!content) {
@@ -75,8 +75,48 @@ function handleTriggerClick(trigger) {
             hideAllOpenedContent();
         }
 
+        positionContent(content, event.clientX, event.clientY);
         showContent(content);
     }
+}
+
+function positionContent(content, clientX, clientY) {
+    const contentDisplay = content.style.display;
+    const contentVisibility = content.style.visibility;
+
+    content.style.left = 0;
+    content.style.top = 0;
+    content.style.visibility = 'hidden';
+    content.style.display = 'block';
+    const contentRect = content.getBoundingClientRect();
+
+    content.style.display = contentDisplay;
+    content.style.visibility = contentVisibility;
+
+    const parent = content.parentNode;
+    const parentRect = parent.getBoundingClientRect();
+
+    const clickRelativeToParent = {
+        x: clientX - parentRect.left + parent.scrollLeft,
+        y: clientY - parentRect.top + parent.scrollTop,
+    };
+
+    const contentOverflowsViewport = {
+        x: clientX + contentRect.width > window.innerWidth,
+        y: clientY + contentRect.height > window.innerHeight,
+    };
+
+    console.log(contentOverflowsViewport);
+
+    content.style.left =
+        (contentOverflowsViewport.x
+            ? clickRelativeToParent.x - contentRect.width
+            : clickRelativeToParent.x) + 'px';
+
+    content.style.top =
+        (contentOverflowsViewport.y
+            ? clickRelativeToParent.y - contentRect.height
+            : clickRelativeToParent.y) + 'px';
 }
 
 function getContent(trigger) {
