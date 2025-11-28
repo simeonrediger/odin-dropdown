@@ -6,8 +6,8 @@ const closedSelector = `.${closedClass}`;
 const openedSelector = `.${openedClass}`;
 
 let root;
-let multipleOpenAllowed = false;
-let remainOpenOnExternalClicks = false;
+let multipleOpenAllowed;
+let remainOpenOnExternalClicks;
 
 function init(rootElement, options = {}) {
     validateRoot(rootElement);
