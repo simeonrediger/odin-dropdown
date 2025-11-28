@@ -12,11 +12,11 @@ function mapContentToButtons(buttons) {
     for (const button of buttons) {
         const nextElement = button.nextElementSibling;
 
-        if (nextElement.matches(contentSelector)) {
-            buttonsAndContent.set(button, nextElement);
-        } else {
+        if (!nextElement.matches(contentSelector)) {
             handleWrongNextElement(button, nextElement);
         }
+
+        buttonsAndContent.set(button, nextElement);
     }
 
     return buttonsAndContent;
