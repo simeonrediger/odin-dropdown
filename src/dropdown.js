@@ -1,5 +1,6 @@
-const triggerAttribute = 'data-dropdown-target';
-const contentAttribute = 'data-dropdown-name';
+const triggerAttribute = 'data-dropdown-trigger';
+const contentAttribute = 'data-dropdown-content';
+
 const closedClass = 'dropdown-closed';
 const closedSelector = `.${closedClass}`;
 
@@ -19,7 +20,14 @@ function init(rootElement, options = {}) {
 
     validateRoot();
     validateOptions();
-    validateTriggerTargets();
+
+    const triggers = root.querySelectorAll(`[${triggerAttribute}]`);
+
+    for (const trigger of triggers) {
+        trigger.ariaExpanded = false;
+        getTargetContent(trigger); // Logs initialization errors early
+    }
+
     insertStyles();
     closeAllContent();
     bindEvents();
@@ -102,20 +110,13 @@ function positionContent(content, clientX, clientY) {
 }
 
 function getTargetContent(trigger) {
-    const contentName = trigger.dataset.dropdownTarget;
-    const contentSelector = `[${contentAttribute}='${contentName}']`;
-    const contentMatches = root.querySelectorAll(contentSelector);
-    const contentCount = contentMatches.length;
+    const contentId = trigger.getAttribute('aria-controls');
+    const content = root.getElementById(contentId);
 
-    if (contentCount === 0) {
-        console.error(`No element matching selector: ${contentSelector}`);
-    } else if (contentCount > 1) {
-        console.error(
-            `More than 1 element matching selector: ${contentSelector}`,
-        );
+    if (!contentId) {
+        console.error(`No target content with ID: ${contentId}`);
     }
 
-    const content = contentMatches[0];
     return content;
 }
 
@@ -152,14 +153,6 @@ function validateOptions() {
         );
 
         remainOpenOnExternalClicks = true;
-    }
-}
-
-function validateTriggerTargets() {
-    const triggers = root.querySelectorAll(`[${triggerAttribute}]`);
-
-    for (const trigger of triggers) {
-        getTargetContent(trigger);
     }
 }
 

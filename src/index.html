@@ -10,17 +10,17 @@
   </head>
 
   <body>
-    <button data-dropdown-target="content-a">Toggle A1</button>
-    <button data-dropdown-target="content-b">Toggle B1</button>
-    <button data-dropdown-target="content-a">Toggle A2</button>
+    <button data-dropdown-trigger aria-controls="content-a">Toggle A1</button>
+    <button data-dropdown-trigger aria-controls="content-b">Toggle B1</button>
+    <button data-dropdown-trigger aria-controls="content-a">Toggle A2</button>
 
-    <ul data-dropdown-name="content-a" class="content-a">
+    <ul data-dropdown-content id="content-a" class="content-a">
       <li><button>Edit</button></li>
       <li><button>Copy</button></li>
       <li><button>Delete</button></li>
     </ul>
 
-    <ul data-dropdown-name="content-b" class="content-b">
+    <ul data-dropdown-content id="content-b" class="content-b">
       <li><button>Edit</button></li>
       <li><button>Copy</button></li>
       <li><button>Delete</button></li>
