@@ -9,6 +9,8 @@ let root;
 let allowMultipleOpen;
 let remainOpenOnExternalClicks;
 
+const openedContentTriggers = new Map();
+
 function init(rootElement, options = {}) {
     validateRoot(rootElement);
     root = rootElement;
@@ -70,7 +72,10 @@ function handleTriggerClick(event, trigger) {
         return;
     }
 
-    if (contentIsOpened(content)) {
+    const triggerAlreadyOpenedContent =
+        openedContentTriggers.get(content) === trigger;
+
+    if (triggerAlreadyOpenedContent) {
         closeContent(content);
     } else {
         if (!allowMultipleOpen) {
@@ -78,7 +83,7 @@ function handleTriggerClick(event, trigger) {
         }
 
         positionContent(content, event.clientX, event.clientY);
-        openContent(content);
+        openContent(content, trigger);
     }
 }
 
@@ -162,11 +167,13 @@ function validateRoot(root) {
 }
 
 function closeContent(content) {
+    openedContentTriggers.delete(content);
     content.removeAttribute(contentIsOpenedAttribute);
     content.classList.add(closedClass);
 }
 
-function openContent(content) {
+function openContent(content, trigger) {
+    openedContentTriggers.set(content, trigger);
     content.setAttribute(contentIsOpenedAttribute, '');
     content.classList.remove(closedClass);
 }
@@ -185,10 +192,6 @@ function closeAllOpenedContent() {
     for (const content of allOpenedContent) {
         closeContent(content);
     }
-}
-
-function contentIsOpened(content) {
-    return content.hasAttribute(contentIsOpenedAttribute);
 }
 
 const dropdown = {
