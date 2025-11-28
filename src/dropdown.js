@@ -13,11 +13,11 @@ function init(root = document) {
             continue;
         }
 
-        button.addEventListener('click', () => toggleContentDisplay(content));
+        button.addEventListener('click', () => toggleContent(content));
     }
 }
 
-function toggleContentDisplay(content) {
+function toggleContent(content) {
     content.classList.toggle(closedClass);
 }
 
