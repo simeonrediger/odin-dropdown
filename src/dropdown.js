@@ -12,9 +12,11 @@ let remainOpenOnExternalClicks;
 function init(rootElement, options = {}) {
     validateRoot(rootElement);
     root = rootElement;
-    allowMultipleOpen = options.multipleOpenAllowed ?? false;
+    allowMultipleOpen = options.allowMultipleOpen ?? false;
     remainOpenOnExternalClicks =
-        options.remainOpenOnExternalClicks ?? allowMultipleOpen ?? false;
+        options.remainOpenOnExternalClicks ??
+        options.allowMultipleOpen ??
+        false;
 
     if (allowMultipleOpen && !remainOpenOnExternalClicks) {
         console.error(
