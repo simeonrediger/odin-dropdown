@@ -3,11 +3,6 @@ const contentSelector = "[data-dropdown='content']";
 
 function init(root = document) {
     const buttons = root.querySelectorAll?.(buttonSelector);
-    const buttonsAndContent = mapContentToButtons(buttons);
-}
-
-function mapContentToButtons(buttons) {
-    const buttonsAndContent = new Map();
 
     for (const button of buttons) {
         const nextElement = button.nextElementSibling;
@@ -16,11 +11,7 @@ function mapContentToButtons(buttons) {
             handleWrongNextElement(button, nextElement);
             continue;
         }
-
-        buttonsAndContent.set(button, nextElement);
     }
-
-    return buttonsAndContent;
 }
 
 function handleWrongNextElement(button, nextElement) {
