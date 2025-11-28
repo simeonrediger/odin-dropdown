@@ -66,13 +66,13 @@ function handleTriggerClick(event, trigger) {
             closeAllOpenedContent();
         }
 
-        positionContent(content, trigger, event.clientX, event.clientY);
+        insertContentAfterTrigger(content, trigger);
+        positionContent(content, event.clientX, event.clientY);
         openContent(content, trigger);
     }
 }
 
-function positionContent(content, trigger, clientX, clientY) {
-    insertContentAfterTrigger(content, trigger);
+function positionContent(content, clientX, clientY) {
     const contentDisplay = content.style.display;
     const contentVisibility = content.style.visibility;
 
