@@ -64,7 +64,7 @@ function handleClick(event) {
 }
 
 function handleTriggerClick(event, trigger) {
-    const content = getContent(trigger);
+    const content = getTargetContent(trigger);
 
     if (!content) {
         console.error(`Trigger is not configured to show dropdown content`);
@@ -123,7 +123,7 @@ function positionContent(content, clientX, clientY) {
             : clickRelativeToParent.y) + 'px';
 }
 
-function getContent(trigger) {
+function getTargetContent(trigger) {
     const contentName = trigger.dataset.dropdownTarget;
     const contentSelector = `[${contentAttribute}='${contentName}']`;
     const contentMatches = root.querySelectorAll(contentSelector);
