@@ -5,16 +5,16 @@ function init(root = document) {
     const buttons = root.querySelectorAll?.(buttonSelector);
 
     for (const button of buttons) {
-        const nextElement = button.nextElementSibling;
+        const content = button.nextElementSibling;
 
-        if (!nextElement.matches(contentSelector)) {
-            handleWrongNextElement(button, nextElement);
+        if (!content.matches(contentSelector)) {
+            handleContentNotFound(button, content);
             continue;
         }
     }
 }
 
-function handleWrongNextElement(button, nextElement) {
+function handleContentNotFound(button, nextElement) {
     console.error(
         'Failed to initialize dropdown.',
         `Element with the "${buttonSelector}" selector was not immediately`,
