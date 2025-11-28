@@ -74,7 +74,7 @@ function handleTriggerClick(event, trigger) {
         closeContent(content);
     } else {
         if (!allowMultipleOpen) {
-            hideAllOpenedContent();
+            closeAllOpenedContent();
         }
 
         positionContent(content, event.clientX, event.clientY);
@@ -176,7 +176,7 @@ function closeAllContent() {
     }
 }
 
-function hideAllOpenedContent() {
+function closeAllOpenedContent() {
     for (const content of root.querySelectorAll(openedSelector)) {
         closeContent(content);
     }
