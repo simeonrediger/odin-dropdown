@@ -146,6 +146,20 @@ function closeOnExternalTarget(event) {
     }
 }
 
+function insertStyles() {
+    const styles = document.createElement('style');
+    styles.innerHTML = `${closedSelector} { display: none; }`;
+    document.head.append(styles);
+}
+
+function validateRoot(root) {
+    if (typeof root.querySelectorAll !== 'function') {
+        throw new TypeError(
+            "'root' must be an Element, Document, or DocumentFragment",
+        );
+    }
+}
+
 function hideContent(content) {
     content.classList.add(closedClass);
     content.classList.remove(openedClass);
@@ -170,20 +184,6 @@ function hideAllOpenedContent() {
 
 function contentIsOpened(content) {
     return content.classList.contains(openedClass);
-}
-
-function insertStyles() {
-    const styles = document.createElement('style');
-    styles.innerHTML = `${closedSelector} { display: none; }`;
-    document.head.append(styles);
-}
-
-function validateRoot(root) {
-    if (typeof root.querySelectorAll !== 'function') {
-        throw new TypeError(
-            "'root' must be an Element, Document, or DocumentFragment",
-        );
-    }
 }
 
 const dropdown = {
