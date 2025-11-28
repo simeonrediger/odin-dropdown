@@ -1,7 +1,7 @@
 const triggerAttribute = 'data-dropdown-trigger';
 const contentAttribute = 'data-dropdown-content';
 
-const closedClass = 'dropdown-closed';
+const contentClosedClass = 'dropdown-closed';
 
 let root;
 let allowMultipleOpen;
@@ -131,7 +131,7 @@ function closeOnExternalTarget(event) {
 
 function insertStyles() {
     const styles = document.createElement('style');
-    styles.innerHTML = `.${closedClass} { display: none; }`;
+    styles.innerHTML = `.${contentClosedClass} { display: none; }`;
     document.head.append(styles);
 }
 
@@ -157,12 +157,12 @@ function validateOptions() {
 
 function closeContent(content) {
     openedContentTriggers.delete(content);
-    content.classList.add(closedClass);
+    content.classList.add(contentClosedClass);
 }
 
 function openContent(content, trigger) {
     openedContentTriggers.set(content, trigger);
-    content.classList.remove(closedClass);
+    content.classList.remove(contentClosedClass);
 }
 
 function closeAllContent() {
