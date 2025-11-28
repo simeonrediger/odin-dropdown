@@ -23,7 +23,10 @@ function init(rootElement, options = {}) {
     validateTriggerTargets();
     insertStyles();
     closeAllContent();
+    bindEvents();
+}
 
+function bindEvents() {
     if (!remainOpenOnExternalClicks) {
         document.addEventListener('mousedown', closeOnExternalTarget);
     }
