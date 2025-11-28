@@ -1,7 +1,6 @@
 const triggerAttribute = 'data-dropdown-target';
 const contentAttribute = 'data-dropdown-name';
 const contentIsOpenedAttribute = 'data-dropdown-is-opened';
-const openedSelector = `[${contentIsOpenedAttribute}]`;
 const closedClass = 'dropdown-closed';
 const closedSelector = `.${closedClass}`;
 
