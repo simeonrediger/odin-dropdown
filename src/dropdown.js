@@ -122,7 +122,8 @@ function positionContent(content, clientX, clientY) {
 function getContent(trigger) {
     const contentName = trigger.dataset.dropdownTarget;
     const contentSelector = `[data-dropdown-name='${contentName}']`;
-    const contentCount = root.querySelectorAll(contentSelector).length;
+    const contentMatches = root.querySelectorAll(contentSelector);
+    const contentCount = contentMatches.length;
 
     if (contentCount === 0) {
         console.error(`No element matching selector: ${contentSelector}`);
@@ -132,7 +133,7 @@ function getContent(trigger) {
         );
     }
 
-    const content = root.querySelector(contentSelector);
+    const content = contentMatches[0];
     return content;
 }
 
