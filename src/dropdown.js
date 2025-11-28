@@ -1,5 +1,6 @@
 const buttonSelector = "[data-dropdown='button']";
 const contentSelector = "[data-dropdown='content']";
+const closedClass = 'dropdown-closed';
 
 function init(root = document) {
     const buttons = root.querySelectorAll?.(buttonSelector);
@@ -11,7 +12,13 @@ function init(root = document) {
             handleContentNotFound(button, content);
             continue;
         }
+
+        button.addEventListener('click', () => toggleContentDisplay(content));
     }
+}
+
+function toggleContentDisplay(content) {
+    content.classList.toggle(closedClass);
 }
 
 function handleContentNotFound(button, nextElement) {
