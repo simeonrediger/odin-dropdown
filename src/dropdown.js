@@ -60,7 +60,7 @@ function handleTriggerClick(event, trigger) {
         openedContentTriggers.get(content) === trigger;
 
     if (triggerAlreadyOpenedContent) {
-        closeContent(content);
+        closeContent(content, trigger);
     } else {
         if (!allowMultipleOpen) {
             closeAllOpenedContent();
@@ -125,7 +125,7 @@ function closeOnExternalTarget(event) {
     const isExternalTarget = !closestTrigger && !closestContent;
 
     if (isExternalTarget) {
-        closeAllContent();
+        closeAllOpenedContent();
     }
 }
 
@@ -155,8 +155,9 @@ function validateOptions() {
     }
 }
 
-function closeContent(content) {
+function closeContent(content, trigger) {
     openedContentTriggers.delete(content);
+    trigger?.setAttribute('aria-expanded', false);
     content.classList.add(contentClosedClass);
 }
 
@@ -175,10 +176,10 @@ function closeAllContent() {
 }
 
 function closeAllOpenedContent() {
-    const allOpenedContent = openedContentTriggers.keys();
+    const openedContentEntries = openedContentTriggers.entries();
 
-    for (const content of allOpenedContent) {
-        closeContent(content);
+    for (const [content, trigger] of openedContentEntries) {
+        closeContent(content, trigger);
     }
 }
 
