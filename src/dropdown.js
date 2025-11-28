@@ -4,10 +4,12 @@ const closedClass = 'dropdown-closed';
 const openedClass = 'dropdown-opened';
 
 let root;
+let multipleOpenAllowed = false;
 
-function init(rootElement) {
+function init(rootElement, options = {}) {
     validateRoot(rootElement);
     root = rootElement;
+    multipleOpenAllowed = options.multipleOpenAllowed ?? false;
 
     const buttons = root.querySelectorAll(buttonSelector);
 
@@ -28,7 +30,10 @@ function handleButtonClick(content) {
     if (contentIsOpened(content)) {
         hideContent(content);
     } else {
-        hideAllContent();
+        if (!multipleOpenAllowed) {
+            hideAllContent();
+        }
+
         showContent(content);
     }
 }
