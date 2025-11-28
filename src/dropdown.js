@@ -106,8 +106,6 @@ function positionContent(content, clientX, clientY) {
         y: clientY + contentRect.height > window.innerHeight,
     };
 
-    console.log(contentOverflowsViewport);
-
     content.style.left =
         (contentOverflowsViewport.x
             ? clickRelativeToParent.x - contentRect.width
