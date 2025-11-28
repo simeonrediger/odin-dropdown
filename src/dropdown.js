@@ -19,16 +19,7 @@ function init(rootElement, options = {}) {
         options.allowMultipleOpen ??
         false;
 
-    if (allowMultipleOpen && !remainOpenOnExternalClicks) {
-        console.error(
-            'remainOpenOnExternalClicks can only be disabled if',
-            'allowMultipleOpen is not enabled.',
-            '\nEnabling remainOpenOnExternalClicks.',
-        );
-
-        remainOpenOnExternalClicks = true;
-    }
-
+    validateOptions();
     insertStyles();
     closeAllContent();
     validateTriggerTargets();
@@ -147,6 +138,18 @@ function validateRoot(root) {
         throw new TypeError(
             "'root' must be an Element, Document, or DocumentFragment",
         );
+    }
+}
+
+function validateOptions() {
+    if (allowMultipleOpen && !remainOpenOnExternalClicks) {
+        console.error(
+            'remainOpenOnExternalClicks can only be disabled if',
+            'allowMultipleOpen is not enabled.',
+            '\nEnabling remainOpenOnExternalClicks.',
+        );
+
+        remainOpenOnExternalClicks = true;
     }
 }
 
