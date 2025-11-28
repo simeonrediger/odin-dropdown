@@ -2,7 +2,6 @@ const triggerAttribute = 'data-dropdown-trigger';
 const contentAttribute = 'data-dropdown-content';
 
 const closedClass = 'dropdown-closed';
-const closedSelector = `.${closedClass}`;
 
 let root;
 let allowMultipleOpen;
@@ -132,7 +131,7 @@ function closeOnExternalTarget(event) {
 
 function insertStyles() {
     const styles = document.createElement('style');
-    styles.innerHTML = `${closedSelector} { display: none; }`;
+    styles.innerHTML = `.${closedClass} { display: none; }`;
     document.head.append(styles);
 }
 
