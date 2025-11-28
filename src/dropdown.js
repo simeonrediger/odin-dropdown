@@ -2,6 +2,7 @@ const buttonSelector = "[data-dropdown='button']";
 const contentSelector = "[data-dropdown='content']";
 const closedClass = 'dropdown-closed';
 const openedClass = 'dropdown-opened';
+const openedSelector = `.${openedClass}`;
 
 let root;
 let multipleOpenAllowed = false;
@@ -49,7 +50,7 @@ function showContent(content) {
 }
 
 function hideAllContent() {
-    for (const content of root.getElementsByClassName(openedClass)) {
+    for (const content of root.querySelectorAll(openedSelector)) {
         hideContent(content);
     }
 }
