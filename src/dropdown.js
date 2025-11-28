@@ -23,7 +23,7 @@ function init(rootElement, options = {}) {
     const triggers = root.querySelectorAll(`[${triggerAttribute}]`);
 
     for (const trigger of triggers) {
-        trigger.ariaExpanded = false;
+        trigger.setAttribute('aria-expanded', false);
         getTargetContent(trigger); // Logs initialization errors early
     }
 
