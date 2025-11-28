@@ -1,5 +1,5 @@
-const buttonSelector = "[data-dropdown='button']";
-const contentSelector = "[data-dropdown='content']";
+const triggerAttribute = 'data-dropdown-target';
+const contentAttribute = 'data-dropdown-name';
 const closedClass = 'dropdown-closed';
 const openedClass = 'dropdown-opened';
 const closedSelector = `.${closedClass}`;
@@ -16,41 +16,79 @@ function init(rootElement, options = {}) {
     remainOpenOnExternalClicks = options.remainOpenOnExternalClicks ?? false;
 
     insertStyles();
-    const buttons = root.querySelectorAll(buttonSelector);
+    hideAllContent();
 
-    for (const button of buttons) {
-        const content = button.nextElementSibling;
+    const triggers = root.querySelectorAll(`[${triggerAttribute}]`);
 
-        if (!content.matches(contentSelector)) {
-            handleContentNotFound(button, content);
-            continue;
+    for (const trigger of triggers) {
+        const contentName = trigger.dataset.dropdownTarget;
+        const contentSelector = `[data-dropdown-name='${contentName}']`;
+        const contentCount = root.querySelectorAll(contentSelector).length;
+
+        if (contentCount === 0) {
+            console.error(`No element matching selector: ${contentSelector}`);
+        } else if (contentCount > 1) {
+            console.error(
+                `More than 1 element matching selector: ${contentSelector}`,
+            );
         }
-
-        hideContent(content);
-        button.addEventListener('click', () => handleButtonClick(content));
     }
 
     if (!remainOpenOnExternalClicks) {
         document.addEventListener('mousedown', closeOnExternalTarget);
     }
+
+    root.addEventListener('click', handleClick);
 }
 
-function handleButtonClick(content) {
+function handleClick({ target }) {
+    const trigger = target.closest(`[${triggerAttribute}]`);
+
+    if (trigger) {
+        handleTriggerClick(trigger);
+    }
+}
+
+function handleTriggerClick(trigger) {
+    const content = getContent(trigger);
+
+    if (!content) {
+        console.error(`Trigger is not configured to show dropdown content`);
+        return;
+    }
+
     if (contentIsOpened(content)) {
         hideContent(content);
     } else {
         if (!multipleOpenAllowed) {
-            hideAllContent();
+            hideAllOpenedContent();
         }
 
         showContent(content);
     }
 }
 
+function getContent(trigger) {
+    const contentName = trigger.dataset.dropdownTarget;
+    const contentSelector = `[data-dropdown-name='${contentName}']`;
+    const contentCount = root.querySelectorAll(contentSelector).length;
+
+    if (contentCount === 0) {
+        console.error(`No element matching selector: ${contentSelector}`);
+    } else if (contentCount > 1) {
+        console.error(
+            `More than 1 element matching selector: ${contentSelector}`,
+        );
+    }
+
+    const content = root.querySelector(contentSelector);
+    return content;
+}
+
 function closeOnExternalTarget(event) {
-    const closestButton = event.target.closest(buttonSelector);
-    const closestContent = event.target.closest(contentSelector);
-    const isExternalTarget = !closestButton && !closestContent;
+    const closestTrigger = event.target.closest(`[${triggerAttribute}]`);
+    const closestContent = event.target.closest(`[${contentAttribute}]`);
+    const isExternalTarget = !closestTrigger && !closestContent;
 
     if (isExternalTarget) {
         hideAllContent();
@@ -68,6 +106,12 @@ function showContent(content) {
 }
 
 function hideAllContent() {
+    for (const content of root.querySelectorAll(`[${contentAttribute}]`)) {
+        hideContent(content);
+    }
+}
+
+function hideAllOpenedContent() {
     for (const content of root.querySelectorAll(openedSelector)) {
         hideContent(content);
     }
@@ -81,18 +125,6 @@ function insertStyles() {
     const styles = document.createElement('style');
     styles.innerHTML = `${closedSelector} { display: none; }`;
     document.head.append(styles);
-}
-
-function handleContentNotFound(button, nextElement) {
-    console.error(
-        'Failed to initialize dropdown.',
-        `Element with the "${buttonSelector}" selector was not immediately`,
-        `followed by an element with the "${contentSelector}" selector.`,
-        '\n\nButton:',
-        button,
-        '\nNext Element:',
-        nextElement,
-    );
 }
 
 function validateRoot(root) {

@@ -39,3 +39,13 @@ li button {
 li button:hover {
   color: #c8f;
 }
+
+.content-a,
+.content-a button {
+  background-color: #500;
+}
+
+.content-b,
+.content-b button {
+  background-color: #005;
+}

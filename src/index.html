@@ -10,22 +10,17 @@
   </head>
 
   <body>
-    <button data-dropdown="button">Toggle dropdown 1</button>
-    <ul data-dropdown="content">
+    <button data-dropdown-target="content-a">Toggle A1</button>
+    <button data-dropdown-target="content-b">Toggle B1</button>
+    <button data-dropdown-target="content-a">Toggle A2</button>
+
+    <ul class="content-a" data-dropdown-name="content-a">
       <li><button>Edit</button></li>
       <li><button>Copy</button></li>
       <li><button>Delete</button></li>
     </ul>
 
-    <button data-dropdown="button">Toggle dropdown 2</button>
-    <ul data-dropdown="content">
-      <li><button>Edit</button></li>
-      <li><button>Copy</button></li>
-      <li><button>Delete</button></li>
-    </ul>
-
-    <button data-dropdown="button">Toggle dropdown 3</button>
-    <ul data-dropdown="content">
+    <ul class="content-b" data-dropdown-name="content-b">
       <li><button>Edit</button></li>
       <li><button>Copy</button></li>
       <li><button>Delete</button></li>
