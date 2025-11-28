@@ -2,7 +2,7 @@ const buttonSelector = "[data-dropdown='button']";
 const contentSelector = "[data-dropdown='content']";
 const closedClass = 'dropdown-closed';
 
-function init(root = document) {
+function init(root) {
     validateRoot(root);
     const buttons = root.querySelectorAll(buttonSelector);
 
