@@ -11,7 +11,6 @@ let remainOpenOnExternalClicks;
 const openedContentTriggers = new Map();
 
 function init(rootElement, options = {}) {
-    validateRoot(rootElement);
     root = rootElement;
     allowMultipleOpen = options.allowMultipleOpen ?? false;
     remainOpenOnExternalClicks =
@@ -19,6 +18,7 @@ function init(rootElement, options = {}) {
         options.allowMultipleOpen ??
         false;
 
+    validateRoot(root);
     validateOptions();
     validateTriggerTargets();
     insertStyles();
