@@ -1,6 +1,7 @@
 {
   "name": "dropdown",
   "version": "1.0.0",
+  "author": "Simeon Rediger (https://simeonrediger.github.io/)",
   "description": "",
   "type": "module",
   "exports": "./src/dropdown.js",
