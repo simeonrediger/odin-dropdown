@@ -1,0 +1,29 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dropdown</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="./index.js"></script>
+  </head>
+
+  <body>
+    <button data-dropdown-trigger aria-controls="content-a">Toggle A1</button>
+    <button data-dropdown-trigger aria-controls="content-b">Toggle B1</button>
+    <button data-dropdown-trigger aria-controls="content-a">Toggle A2</button>
+
+    <ul data-dropdown-content id="content-a" class="content-a">
+      <li><button>Edit</button></li>
+      <li><button>Copy</button></li>
+      <li><button>Delete</button></li>
+    </ul>
+
+    <ul data-dropdown-content id="content-b" class="content-b">
+      <li><button>Edit</button></li>
+      <li><button>Copy</button></li>
+      <li><button>Delete</button></li>
+    </ul>
+  </body>
+</html>
