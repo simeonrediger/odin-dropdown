@@ -5,19 +5,19 @@ const contentClosedClass = 'dropdown-closed';
 
 let root;
 let allowMultipleOpen;
-let remainOpenOnExternalClicks;
 let remainOpenOnEscape;
+let remainOpenOnExternalClicks;
 
 const openedContentTriggers = new Map();
 
 function init(rootElement, options = {}) {
     root = rootElement;
     allowMultipleOpen = options.allowMultipleOpen ?? false;
+    remainOpenOnEscape = options.remainOpenOnEscape ?? false;
     remainOpenOnExternalClicks =
         options.remainOpenOnExternalClicks ??
         options.allowMultipleOpen ??
         false;
-    remainOpenOnEscape = options.remainOpenOnEscape ?? false;
 
     validateRoot();
     validateOptions();
