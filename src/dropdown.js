@@ -190,13 +190,13 @@ function validateRoot() {
 
 function validateOptions() {
     if (allowMultipleOpen && !remainOpenOnExternalClicks) {
+        remainOpenOnExternalClicks = true;
+
         console.error(
             'remainOpenOnExternalClicks can only be disabled if',
             'allowMultipleOpen is not enabled.',
             '\nEnabling remainOpenOnExternalClicks.',
         );
-
-        remainOpenOnExternalClicks = true;
     }
 }
 
