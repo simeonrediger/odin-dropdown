@@ -1,23 +1,29 @@
 {
-  "name": "dropdown",
+  "name": "@simeonrediger/dropdown",
   "version": "1.0.0",
-  "author": "Simeon Rediger (https://simeonrediger.github.io/)",
-  "description": "",
-  "type": "module",
-  "exports": "./src/dropdown.js",
-  "files": [
-    "src/"
-  ],
-  "scripts": {},
+  "description": "An attribute-driven dropdown behavioral utility that automates dropdown content positioning, opening, and closing.",
   "keywords": [
     "dropdown",
     "drop-down",
     "menu",
     "toggle"
   ],
-  "license": "ISC",
   "homepage": "https://github.com/simeonrediger/odin-dropdown",
-  "bugs": "https://github.com/simeonrediger/odin-dropdown/issues",
+  "bugs": {
+    "url": "https://github.com/simeonrediger/odin-dropdown/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simeonrediger/odin-dropdown.git"
+  },
+  "license": "ISC",
+  "author": "Simeon Rediger (https://simeonrediger.github.io/)",
+  "type": "module",
+  "exports": "./src/index.js",
+  "main": "./src/index.js",
+  "files": [
+    "src/"
+  ],
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "eslint": "^9.39.1",
