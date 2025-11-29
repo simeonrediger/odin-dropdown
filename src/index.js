@@ -24,7 +24,7 @@ function init(options = {}) {
 
     for (const trigger of triggers) {
         trigger.setAttribute('aria-expanded', false);
-        getTargetContent(trigger); // Logs initialization errors early
+        getTargetContent(trigger); // Logs trigger configuration errors early
     }
 
     insertStyles();
