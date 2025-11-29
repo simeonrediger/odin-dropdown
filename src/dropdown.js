@@ -64,7 +64,7 @@ function handleTriggerClick(event, trigger) {
     const content = getTargetContent(trigger);
 
     if (!content) {
-        console.error(`Trigger is not configured to show dropdown content`);
+        console.error('Trigger is not configured to show dropdown content');
         return;
     }
 
