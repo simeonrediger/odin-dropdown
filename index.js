@@ -1,3 +1,3 @@
-import dropdown from '../src/dropdown.js';
+import dropdown from '../src/index.js';
 
 dropdown.init();
