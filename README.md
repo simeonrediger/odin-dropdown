@@ -34,3 +34,21 @@ dropdown.init({
     remainOpenOnExternalClick,
 });
 ```
+
+# Options
+
+## `root`
+
+Default is `document`. Must be an `Element`, `Document`, or `DocumentFragment`. Allows for more specific scoping of dropdown initialization.
+
+## `allowMultipleOpen`
+
+Default is `false`. Setting to `true` will allow multiple dropdowns to be open at once, rather than closing any open dropdown when another is opened. Each opened dropdown must be a unique element to prevent one dropdown trigger from stealing another dropdown trigger's dropdown content.
+
+## `remainOpenOnEscape`
+
+Default is `false`. Setting to `true` will prevent dropdown(s) from being closed when the Escape key is pressed.
+
+## `remainOpenOnExternalClick`
+
+Default is `false`. Setting to `true` will prevent dropdown(s) from being closed when the `mousedown` event targets an element that is not a dropdown content element. This option will always be `true` if `allowMultipleOpen` is `true`.
