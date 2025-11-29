@@ -10,8 +10,8 @@ let remainOpenOnExternalClicks;
 
 const openedContentTriggers = new Map();
 
-function init(rootElement, options = {}) {
-    root = rootElement;
+function init(options = {}) {
+    root = options.root ?? document;
     allowMultipleOpen = options.allowMultipleOpen ?? false;
     remainOpenOnEscape = options.remainOpenOnEscape ?? false;
     remainOpenOnExternalClicks =
