@@ -6,7 +6,7 @@ const contentClosedClass = 'dropdown-closed';
 let root;
 let allowMultipleOpen;
 let remainOpenOnEscape;
-let remainOpenOnExternalClicks;
+let remainOpenOnExternalClick;
 
 const openedContentTriggers = new Map();
 
@@ -14,10 +14,8 @@ function init(options = {}) {
     root = options.root ?? document;
     allowMultipleOpen = options.allowMultipleOpen ?? false;
     remainOpenOnEscape = options.remainOpenOnEscape ?? false;
-    remainOpenOnExternalClicks =
-        options.remainOpenOnExternalClicks ??
-        options.allowMultipleOpen ??
-        false;
+    remainOpenOnExternalClick =
+        options.remainOpenOnExternalClick ?? options.allowMultipleOpen ?? false;
 
     validateRoot();
     validateOptions();
@@ -41,7 +39,7 @@ function insertStyles() {
 }
 
 function bindEvents() {
-    if (!remainOpenOnExternalClicks) {
+    if (!remainOpenOnExternalClick) {
         document.addEventListener('mousedown', closeOnExternalTarget);
     }
 
@@ -189,13 +187,13 @@ function validateRoot() {
 }
 
 function validateOptions() {
-    if (allowMultipleOpen && !remainOpenOnExternalClicks) {
-        remainOpenOnExternalClicks = true;
+    if (allowMultipleOpen && !remainOpenOnExternalClick) {
+        remainOpenOnExternalClick = true;
 
         console.error(
-            'remainOpenOnExternalClicks can only be disabled if',
+            'remainOpenOnExternalClick can only be disabled if',
             'allowMultipleOpen is not enabled.',
-            '\nEnabling remainOpenOnExternalClicks.',
+            '\nEnabling remainOpenOnExternalClick.',
         );
     }
 }
